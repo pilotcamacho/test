@@ -19,7 +19,11 @@
     "target": "es2022",
     "module": "es2020",
     "lib": ["es2018", "dom"],
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    // New Added
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true // This can help ignore type errors in third-party libraries
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
