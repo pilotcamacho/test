@@ -1,12 +1,64 @@
-import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import {
+  IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonInput, IonButton, IonList,
+  IonListHeader
+} from '@ionic/angular/standalone';
+import { TestObjectService } from '../services/test-object.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent],
+  imports: [IonListHeader, IonInput, IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonButton,
+    CommonModule, FormsModule,
+    IonList
+  ],
 })
-export class HomePage {
-  constructor() {}
+export class HomePage implements OnInit {
+
+  contentList: { id: string, content: string | null }[] = []
+
+  content: string = ''
+
+  constructor(
+    private testObjectSrv: TestObjectService
+  ) {
+
+  }
+
+  ngOnInit(): void {
+    this.updateList()
+  }
+
+  updateList() {
+    this.testObjectSrv.listTestObjects().then((res) => {
+      this.contentList = res
+    }).catch((err) => {
+      console.log('HomePage::constructor::err: ', err);
+    })
+  }
+
+  async addDataObject() {
+    console.log('HomePage::addDataObject::this.content: ', this.content);
+    this.testObjectSrv.createTestObject({ content: this.content }).then((res) => {
+      console.log('HomePage::addDataObject::res: ', res);
+      this.updateList()
+
+    }).catch((err) => {
+      console.log('HomePage::addDataObject::err: ', err);
+    })
+  }
+
+  deleteContent(id: string) {
+    this.testObjectSrv.deleteTestObject(id).then((res) => {
+      console.log('HomePage::deleteContent::res: ', res);
+      this.updateList()
+    }).catch((err) => {
+      console.log('HomePage::deleteContent::err: ', err);
+    })
+
+  }
+
 }

@@ -1,20 +1,38 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Data Object
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <!-- LIST OF EXISTING CONTENTS -->
+  <ion-list *ngIf="contentList.length > 0" class="ion-padding">
+    <ion-list-header>
+      <ion-label>Saved Objects</ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let item of contentList" button detail="false" (click)="deleteContent(item.id)" color="light">
+      <ion-label>{{ item.content }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <form (ngSubmit)="addDataObject()" #momentoForm="ngForm" class="ion-padding">
+
+    <!-- Description -->
+    <ion-item>
+      <ion-label position="stacked">Description</ion-label>
+      <ion-input type="text" placeholder="Enter content" [(ngModel)]="content" name="description" required></ion-input>
+    </ion-item>
+
+
+    <!-- SUBMIT BUTTON -->
+    <ion-button expand="block" type="submit" [disabled]="!momentoForm.form.valid">
+      Add Data Object
+    </ion-button>
+  </form>
+
+
 </ion-content>
