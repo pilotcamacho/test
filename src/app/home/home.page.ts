@@ -6,6 +6,7 @@ import {
   IonListHeader
 } from '@ionic/angular/standalone';
 import { TestObjectService } from '../services/test-object.service';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-home',
@@ -22,14 +23,18 @@ export class HomePage implements OnInit {
 
   content: string = ''
 
+  email: string = 'Guest'
+
   constructor(
-    private testObjectSrv: TestObjectService
+    private testObjectSrv: TestObjectService,
+    private usrSrv: UsuarioService
   ) {
 
   }
 
   ngOnInit(): void {
     this.updateList()
+    this.email = this.usrSrv.email
   }
 
   updateList() {
