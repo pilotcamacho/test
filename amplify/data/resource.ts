@@ -17,6 +17,7 @@ const schema = a.schema({
 export type Schema = ClientSchema<typeof schema>;
 
 export const testData = defineData({
+  name: 'TestAppData',
   schema,
   authorizationModes: {
     defaultAuthorizationMode: 'identityPool',
