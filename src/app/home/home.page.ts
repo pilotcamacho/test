@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonInput, IonButton, IonList,
-  IonListHeader
+  IonListHeader, IonButtons
 } from '@ionic/angular/standalone';
 import { TestObjectService } from '../services/test-object.service';
 import { UsuarioService } from '../services/usuario.service';
@@ -14,7 +14,7 @@ import { UsuarioService } from '../services/usuario.service';
   styleUrls: ['home.page.scss'],
   imports: [IonListHeader, IonInput, IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonButton,
     CommonModule, FormsModule,
-    IonList
+    IonList, IonButtons
   ],
 })
 export class HomePage implements OnInit {
@@ -63,7 +63,14 @@ export class HomePage implements OnInit {
     }).catch((err) => {
       console.log('HomePage::deleteContent::err: ', err);
     })
+  }
 
+  signOut() {
+    this.usrSrv.signOut().then((res) => {
+      console.log('HomePage::signOut::res: ', res);
+    }).catch((err) => {
+      console.log('HomePage::signOut::err: ', err);
+    })
   }
 
 }

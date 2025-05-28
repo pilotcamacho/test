@@ -11,7 +11,7 @@ const schema = a.schema({
     .model({
       content: a.string(),
     })
-    .authorization((allow) => [allow.guest()]),
+    .authorization((allow) => [allow.owner(), allow.authenticated()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -20,7 +20,8 @@ export const testData = defineData({
   name: 'TestAppData',
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: 'identityPool',
+    // defaultAuthorizationMode: 'identityPool',
+    defaultAuthorizationMode: 'userPool',
   },
 });
 

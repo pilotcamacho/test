@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 // import { Hub } from 'aws-amplify/utils';
-import { getCurrentUser } from 'aws-amplify/auth';
+import { getCurrentUser, signOut } from 'aws-amplify/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
 // import { AuthenticatorService } from '@aws-amplify/ui-angular';
+
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,11 @@ export class UsuarioService {
       this.isSignedIn = false;
       this.userSignedInSubject.next(false);  // Emit signed-out event
     }
+  }
+
+  async signOut(): Promise<void> {
+    console.log('UsuarioService::signOut::about to signOut ....');
+    return signOut(); // Return the Promise so the caller can handle it
   }
 
 }
