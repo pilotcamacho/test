@@ -53,9 +53,9 @@ export class AuthenticationPage implements OnInit {
   async confirm() {
     console.log('AuthenticationPage:::confirm()');
 
-    if (this.authState === 'SIGNED_UP_NOT_CONFIRMED') {
-      return this.confirmSignUp();
-    }
+    // if (this.authState === 'SIGNED_UP_NOT_CONFIRMED') {
+    //   return this.confirmSignUp();
+    // }
     if (this.authState === 'SIGNED_IN_NOT_CONFIRMED') {
       return this.confirmSignIn();
     }
@@ -65,33 +65,29 @@ export class AuthenticationPage implements OnInit {
     console.log('AuthenticationPage:::signUp()');
 
     const result = await this.auth.signUpWithEmail(this.emailForm.value.email);
-    if (result.status === 'CONFIRM_SIGN_UP') {
-      this.authState = 'SIGNED_UP_NOT_CONFIRMED';
-      this.signIn()
+    console.log('AuthenticationPage:::signUp()::result: ', result);
 
-    } else if (result.status === 'USER_ALREADY_EXISTS') {
-      this.signIn()
-      // this.authState = 'SIGNED_IN_NOT_CONFIRMED';
-
-    } else if (result.status === 'DONE') {
-      this.authState = 'SIGNED_UP_CONFIRMED';
+    if (result.status === 'CONFIRM_SIGN_UP' || result.status === 'USER_ALREADY_EXISTS' || result.status === 'DONE') {
+      return this.signIn()
     }
   }
 
-  async confirmSignUp() {
-    console.log('AuthenticationPage:::confirmSignUp()');
+  // async confirmSignUp() {
+  //   console.log('AuthenticationPage:::confirmSignUp()');
 
-    const success = await this.auth.confirmEmailSignUp(this.emailForm.value.email, this.otpForm.value.code);
-    if (success) {
-      this.authState = 'SIGNED_UP_CONFIRMED';
-    }
-  }
+  //   const success = await this.auth.confirmEmailSignUp(this.emailForm.value.email, this.otpForm.value.code);
+  //   if (success) {
+  //     this.authState = 'SIGNED_UP_CONFIRMED';
+  //   }
+  // }
 
   async signIn() {
     console.log('AuthenticationPage:::signIn()');
 
     try {
       const result = await this.auth.signInWithEmail(this.emailForm.value.email);
+      console.log('AuthenticationPage:::signIn()::result: ', result);
+
 
       if (result.status === 'CONFIRM_SIGN_IN_WITH_EMAIL_CODE') {
         this.authState = 'SIGNED_IN_NOT_CONFIRMED';
