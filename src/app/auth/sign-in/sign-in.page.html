@@ -30,7 +30,7 @@
   <form [formGroup]="otpForm" (ngSubmit)="submitOtp()" *ngIf="showOtpInput">
     <ion-item>
       <ion-label position="floating">OTP Code</ion-label>
-      <ion-input type="text" formControlName="otp" maxlength="6"></ion-input>
+      <ion-input type="text" formControlName="otp" maxlength="8"></ion-input>
     </ion-item>
     <ion-button expand="full" type="submit" [disabled]="otpForm.invalid">Confirm OTP</ion-button>
   </form>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton } from '@ionic/angular/standalone';
+// import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton } from '@ionic/angular/standalone';
 
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule  } from '@angular/forms';
 import { signIn, confirmSignIn } from '@aws-amplify/auth';
@@ -14,7 +14,7 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./sign-in.page.scss'],
   standalone: true,
   imports: [IonicModule,
-    IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule]
+    CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class SignInPage implements OnInit {
   emailForm: FormGroup;
@@ -31,7 +31,7 @@ export class SignInPage implements OnInit {
     });
 
     this.otpForm = this.fb.group({
-      otp: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
+      otp: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
     });
   }
 
