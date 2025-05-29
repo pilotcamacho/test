@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NavController } from '@ionic/angular';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonInput, IonButton, IonList,
   IonListHeader, IonButtons
@@ -27,7 +28,8 @@ export class HomePage implements OnInit {
 
   constructor(
     private testObjectSrv: TestObjectService,
-    private usrSrv: UsuarioService
+    private usrSrv: UsuarioService,
+    private navCtrl: NavController
   ) {
 
   }
@@ -68,6 +70,7 @@ export class HomePage implements OnInit {
   signOut() {
     this.usrSrv.signOut().then((res) => {
       console.log('HomePage::signOut::res: ', res);
+      this.navCtrl.navigateRoot('/authentication');
     }).catch((err) => {
       console.log('HomePage::signOut::err: ', err);
     })

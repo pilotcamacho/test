@@ -16,7 +16,6 @@ import { Router } from '@angular/router';
 })
 export class SignUpPage implements OnInit {
 
-  email = '';
 
   constructor(
     private auth: AuthService,
@@ -26,12 +25,5 @@ export class SignUpPage implements OnInit {
   ngOnInit() {
   }
 
-  async signUp() {
-    const result = await this.auth.signUpWithEmail(this.email);
-    if (result.status === 'CONFIRM_SIGN_UP') {
-      this.router.navigate(['/confirm'], { state: { email: this.email } });
-    } else if (result.status === 'DONE') {
-      this.router.navigate(['/home']);
-    }
-  }
+
 }

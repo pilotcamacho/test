@@ -9,7 +9,7 @@ export const authGuard: CanActivateFn = async () => {
     await getCurrentUser();
     return true; // User is logged in
   } catch (error) {
-    router.navigate(['/sign-in']);
+    router.navigate(['/authentication']);
     return false; // User not logged in
   }
 };

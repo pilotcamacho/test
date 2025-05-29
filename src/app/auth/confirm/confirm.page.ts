@@ -30,10 +30,5 @@ export class ConfirmPage implements OnInit {
   ngOnInit() {
   }
 
-  async confirm() {
-    const success = await this.auth.confirmEmailSignUp(this.email, this.code);
-    if (success) {
-      this.router.navigate(['/home']);
-    }
-  }
+
 }
